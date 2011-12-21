@@ -13,7 +13,7 @@ module KashflowApi
             end
             raise "Incorrect username or password" if result.to_hash.first.last[:status_detail] == "Incorrect username or password"
             raise "Your IP Address is not in the access list!" if result.to_hash.first.last[:status_detail] =~ /The IP address of .*? is not in the access list/
-            raise api_call.xml if result.to_hash.first.last[:status] == "NO"
+            #raise api_call.xml if result.to_hash.first.last[:status] == "NO"
             raise "Kashflow Error: #{result.to_hash.first.last[:status_detail]}" if result.to_hash.first.last[:status] == "NO"
             return result
         end

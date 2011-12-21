@@ -6,6 +6,7 @@ describe KashflowApi::Customer do
     before :each do
         default_config
     end
+    
     it "should find a customer" do
         KashflowApi::Customer.find_by_customer_code(test_data("customer_code")).should be_a KashflowApi::Customer
         KashflowApi::Customer.find(test_data("customer_code")).should be_a KashflowApi::Customer

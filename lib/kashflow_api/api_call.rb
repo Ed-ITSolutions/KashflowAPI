@@ -28,7 +28,7 @@ module KashflowApi
             @object = words[1].downcase
             words[words.count - 1] = words.last.upcase if words.last == "Id"
             @field = words.last
-            @field = "Code" if method == :get_customer || @field == "Balance"
+            @field = "Code" if method == :get_customer || @field == "Balance" || method == :get_supplier
             @method = words.join
         end
         
@@ -58,6 +58,10 @@ module KashflowApi
                         out = "<Customer#{@field}>#{argument}</Customer#{@field}>"
                     elsif @object == "customers"
                         out = "<#{@field}>#{argument}</#{@field}>"
+                    elsif @object == "quote"
+                        out = "<Quote#{@field}>#{argument}</Quote#{@field}>"
+                    elsif @object == "supplier"
+                        out = "<Supplier#{@field}>#{argument}</Supplier#{@field}>"
                     end
                 elsif @action == "update" || @action == "insert"
                     if @object == "customer"

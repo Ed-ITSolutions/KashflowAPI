@@ -2,14 +2,18 @@
 require "savon"
 # Kashflow Main Clases
 require "kashflow_api/soap_object"      # Soap Object Class
+require "kashflow_api/config"           # Config Class
 # Kashflow Api Modules & Classes
 require "kashflow_api/api"              # Api Class
 require "kashflow_api/api_call"         # ApiCall Class
 require "kashflow_api/client"           # Client Class
-require "kashflow_api/config"           # Config Class
 # Models
 require "kashflow_api/models/customer"  # Customer Class
 require "kashflow_api/models/customer_balance" # Customer Balance
+require "kashflow_api/models/invoice"   # Invoice Class
+require "kashflow_api/models/nominal_code" # Nominal Code
+require "kashflow_api/models/quote"     # Quote Class
+require "kashflow_api/models/supplier"  # Supplier
 # Version
 require "kashflow_api/version"
 

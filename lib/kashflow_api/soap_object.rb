@@ -1,6 +1,6 @@
 module KashflowApi
     class SoapObject
-        attr_reader :hash
+        attr_accessor :hash
         
         def initialize(hash = nil)
             if hash
