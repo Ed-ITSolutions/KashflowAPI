@@ -20,7 +20,43 @@ module KashflowApi
             result.basic_hash["soap:Envelope"]["soap:Body"]["GetSuppliersResponse"]["GetSuppliersResult"]["Supplier"].each do |supplier|
                 suppliers.push self.build_from_soap supplier
             end
-            suppliers
+            suppliers.sort { |x, y| x.name <=> y.name }
+        end
+        
+        def save
+           if @hash["SupplierID"] == "0"
+               insert_supplier
+           else
+               update_supplier
+           end 
+        end
+        
+        def to_xml
+            xml = []
+            id_line = ""
+            @hash.keys.each do |key|
+                if key == "SupplierID"
+                    id_line = "<#{key}>#{@hash[key]}</#{key}>" unless @hash[key] == "0"
+                else
+                    xml.push("<#{key}>#{@hash[key]}</#{key}>")
+                end
+            end
+            [id_line, xml.join].join
+        end
+        
+        private
+        
+        def blank_object_hash
+            {"Code" => "", "Name" => "", "Contact" => "", "Telephone" => "", "Mobile" => "", "Fax" => "", "Email" => "", "Address1" => "", "Address2" => "",
+                "Address3" => "", "Address4" => "", "Postcode" => "", "Website" => "", "VATNumber" => "", "Notes" => ""}.merge(KashflowApi::Supplier.find("").hash)
+        end
+        
+        def update_supplier
+            KashflowApi.api.update_supplier(self)
+        end
+        
+        def insert_supplier
+            KashflowApi.api.insert_supplier(self)
         end
     end
 end

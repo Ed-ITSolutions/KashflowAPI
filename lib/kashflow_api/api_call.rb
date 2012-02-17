@@ -5,6 +5,7 @@ module KashflowApi
         def initialize(method, argument)
             set_method(method)
             build_xml(argument)
+            raise xml if @raise
             @result = make_call
         end
         
@@ -62,10 +63,32 @@ module KashflowApi
                         out = "<Quote#{@field}>#{argument}</Quote#{@field}>"
                     elsif @object == "supplier"
                         out = "<Supplier#{@field}>#{argument}</Supplier#{@field}>"
+                    elsif @object == "receipt"
+                        out = "<ReceiptNumber>#{argument}</ReceiptNumber>"
+                    elsif @object == "invoice"
+                        out = "<InvoiceNumber>#{argument}</InvoiceNumber>"
                     end
                 elsif @action == "update" || @action == "insert"
                     if @object == "customer"
                         out = "<custr>#{argument.to_xml}</custr>"
+                    elsif @object == "supplier"
+                        if @action == "insert"
+                            out = "<supl>#{argument.to_xml}</supl>"
+                        else
+                            out = "<sup>#{argument.to_xml}</sup>"
+                        end
+                    elsif @object == "receipt"
+                        if @field == "Line"
+                            out = "<ReceiptID>#{argument.receiptid}</ReceiptID><InvLine>#{argument.to_xml}</InvLine>"
+                        else
+                            out = "<Inv>#{argument.to_xml}</Inv>"
+                        end
+                    elsif @object == "invoice"
+                        if @field == "Line"
+                            out = "<InvoiceID>#{argument.invoiceid}</InvoiceID><InvLine>#{argument.to_xml}</InvLine>"
+                        else
+                            out = "<Inv>#{argument.to_xml}</Inv>"
+                        end
                     end
                 elsif @action == "delete"
                     if @object == "customer"

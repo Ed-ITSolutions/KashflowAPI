@@ -11,8 +11,10 @@ require "kashflow_api/client"           # Client Class
 require "kashflow_api/models/customer"  # Customer Class
 require "kashflow_api/models/customer_balance" # Customer Balance
 require "kashflow_api/models/invoice"   # Invoice Class
+require "kashflow_api/models/line"      # Invoice Line 
 require "kashflow_api/models/nominal_code" # Nominal Code
 require "kashflow_api/models/quote"     # Quote Class
+require "kashflow_api/models/receipt"   # Receipt Class
 require "kashflow_api/models/supplier"  # Supplier
 # Version
 require "kashflow_api/version"
