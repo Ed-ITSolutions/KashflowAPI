@@ -22,5 +22,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec"
   
   # Runtime Dependencies
-  s.add_runtime_dependency "savon"
+  s.add_runtime_dependency "savon", "0.9.7"
 end
