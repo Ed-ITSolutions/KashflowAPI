@@ -5,6 +5,10 @@ module KashflowApi
                 insert_receipt_line
             elsif @hash["InvoiceID"] != ""
                 insert_invoice_line
+            elsif @hash["InvoiceNumber"] != ""
+                insert_invoice_number_line
+            elsif @hash["ReceiptNumber"] != ""
+                insert_receipt_number_line    
             end
         end
         
@@ -24,7 +28,7 @@ module KashflowApi
         private
         
         def blank_object_hash
-            {"Quantity" => "", "Description" => "", "ChargeType" => "", "VatAmount" => "", "VatRate" => "", "Rate" => "", "ReceiptID" => "", "InvoiceID" => "" }
+            {"Quantity" => "", "Description" => "", "ChargeType" => "", "VatAmount" => "", "VatRate" => "", "Rate" => "", "ReceiptID" => "", "InvoiceID" => "", "InvoiceNumber" => "", "ReceiptNumber" => "" }
         end
         
         def insert_receipt_line
@@ -33,6 +37,14 @@ module KashflowApi
         
         def insert_invoice_line
             KashflowApi.api.insert_invoice_line(self)
+        end
+        
+        def insert_invoice_number_line
+          KashflowApi.api.insert_invoice_line_with_invoice_number(self)
+        end
+        
+        def insert_receipt_number_line
+          KashflowApi.api.insert_receipt_line_from_number(self)
         end
     end
 end

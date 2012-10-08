@@ -80,12 +80,16 @@ module KashflowApi
                     elsif @object == "receipt"
                         if @field == "Line"
                             out = "<ReceiptID>#{argument.receiptid}</ReceiptID><InvLine>#{argument.to_xml}</InvLine>"
+                        elsif @field == "Number"
+                            out = "<ReceiptNumber>#{argument.receiptnumber}</ReceiptNumber><InvLine>#{argument.to_xml}</InvLine>"
                         else
                             out = "<Inv>#{argument.to_xml}</Inv>"
                         end
                     elsif @object == "invoice"
                         if @field == "Line"
                             out = "<InvoiceID>#{argument.invoiceid}</InvoiceID><InvLine>#{argument.to_xml}</InvLine>"
+                        elsif @field == "Number"
+                            out = "<InvoiceNumber>#{argument.invoicenumber}</InvoiceNumber><InvLine>#{argument.to_xml}</InvLine>"
                         else
                             out = "<Inv>#{argument.to_xml}</Inv>"
                         end
