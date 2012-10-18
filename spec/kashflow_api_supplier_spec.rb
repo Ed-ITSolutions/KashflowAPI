@@ -1,6 +1,4 @@
-require 'spec/spec_helper'
-# Require the gem
-require 'lib/kashflow_api'
+require 'spec_helper'
 
 describe KashflowApi::Supplier do
     before :each do
@@ -19,6 +17,7 @@ describe KashflowApi::Supplier do
     end
     
     it "should find a supplier by kashflowid" do
-        KashflowApi::Supplier.find_by_supplier_id(test_data("supplier_id")).should be_a KashflowApi::Supplier
+        id = KashflowApi::Supplier.find(test_data("supplier_code")).supplierid
+        KashflowApi::Supplier.find_by_supplier_id(id).should be_a KashflowApi::Supplier
     end
 end

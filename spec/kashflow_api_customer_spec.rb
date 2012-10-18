@@ -1,6 +1,4 @@
-require 'spec/spec_helper'
-# Require the gem
-require 'lib/kashflow_api'
+require 'spec_helper'
 
 describe KashflowApi::Customer do
     before :each do
@@ -23,7 +21,8 @@ describe KashflowApi::Customer do
     end
     
     it "should find a customer by kashflowid" do
-        KashflowApi::Customer.find_by_customer_id(test_data("customer_id")).should be_a KashflowApi::Customer 
+        id = KashflowApi::Customer.find(test_data("customer_code")).customerid
+        KashflowApi::Customer.find_by_customer_id(id).should be_a KashflowApi::Customer 
     end
     
     it "should find a customer by email" do

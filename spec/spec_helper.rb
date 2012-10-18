@@ -1,5 +1,5 @@
 require 'yaml'
-
+require './lib/kashflow_api'
 
 def default_config
     KashflowApi.configure do |c|

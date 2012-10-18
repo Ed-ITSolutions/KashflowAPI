@@ -1,6 +1,4 @@
-require 'spec/spec_helper'
-# Require the gem
-require 'lib/kashflow_api'
+require 'spec_helper'
 
 describe KashflowApi::CustomerBalance do
     before :each do
