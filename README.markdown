@@ -18,18 +18,6 @@ You can now call methods on the models e.g.
 
 	KashflowApi::Customer.all
 
-# Unimplemented Methods
+# More Info
 
-Some of the methods in the Kashflow API have not been implemented in this gem (yet)
-
-## Customers
-
-* GetCustomersModifiedSince
-* GetCustomerSources
-* GetCustomerVATNumber
-* SetCustomerVATNumber
-* GetCustomerCurrency
-* SetCustomerCurrency
-* GetCustomerAdvancePayments
-
-## Quotes
+For more info head over to the [wiki][https://github.com/Ed-ITSolutions/KashflowAPI/wiki]
