@@ -2,7 +2,7 @@ module KashflowApi
     class Invoice < KashflowApi::SoapObject
         def self.find(search)
             result = KashflowApi.api.get_invoice(search)
-            self.build_from_soap(result.basic_hash["soap:Envelope"]["soap:Body"]["GetInvoiceResponse"]["GetInvoiceResult"])
+            self.build_from_soap(result.basic_hash[:envelope][:body][:get_invoice_response][:get_invoice_result])
         end
         
         def customer

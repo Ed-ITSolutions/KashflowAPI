@@ -6,18 +6,18 @@ module KashflowApi
         
         def self.find_by_supplier_code(search)
             result = KashflowApi.api.get_supplier(search)
-            self.build_from_soap(result.basic_hash["soap:Envelope"]["soap:Body"]["GetSupplierResponse"]["GetSupplierResult"])
+            self.build_from_soap(result.hash[:envelope][:body][:get_supplier_response][:get_supplier_result])
         end
         
         def self.find_by_supplier_id(search)
             result = KashflowApi.api.get_supplier_by_id(search)
-            self.build_from_soap(result.basic_hash["soap:Envelope"]["soap:Body"]["GetSupplierByIDResponse"]["GetSupplierByIDResult"])
+            self.build_from_soap(result.hash[:envelope][:body][:get_supplier_by_id_response][:get_supplier_by_id_result])
         end
         
         def self.all
             result = KashflowApi.api.get_suppliers
             suppliers = []
-            result.basic_hash["soap:Envelope"]["soap:Body"]["GetSuppliersResponse"]["GetSuppliersResult"]["Supplier"].each do |supplier|
+            result.hash[:envelope][:body][:get_suppliers_response][:get_suppliers_result][:supplier].each do |supplier|
                 suppliers.push self.build_from_soap supplier
             end
             suppliers.sort { |x, y| x.name <=> y.name }

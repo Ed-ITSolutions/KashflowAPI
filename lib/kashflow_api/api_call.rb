@@ -1,8 +1,9 @@
 module KashflowApi
     class ApiCall
-        attr_reader :result, :xml, :method
+        attr_reader :result, :xml, :method, :method_sym
         
         def initialize(method, argument)
+            @method_sym = method.to_sym
             set_method(method)
             build_xml(argument)
             raise xml if @raise

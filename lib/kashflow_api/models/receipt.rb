@@ -2,7 +2,7 @@ module KashflowApi
     class Receipt < KashflowApi::SoapObject
             def self.find(search)
                 result = KashflowApi.api.get_receipt(search)
-                self.build_from_soap(result.basic_hash["soap:Envelope"]["soap:Body"]["GetReceiptResponse"]["GetReceiptResult"])
+                self.build_from_soap(result.hash[:envelope][:body][:get_receipt_response][:get_receipt_result])
             end
 
             def save

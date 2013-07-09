@@ -3,14 +3,14 @@ module KashflowApi
         def initialize(config)
             @config = config
             @url = "https://securedwebapp.com/api/service.asmx?WSDL"
-            
-            @client = Savon::Client.new @url
+       
+            @client = Savon.client(wsdl: @url, log: @config.loggers)
         end
         
         def call(api_call)
-            result = @client.request("KashFlow/#{api_call.method}") do |soap|
-                soap.xml = api_call.xml
-            end
+          #"KashFlow/#{api_call.method}"
+            #result = @client.xml_call(api_call.method_sym, api_call)
+            result = @client.call(api_call.method_sym, xml: api_call.xml)
             raise "Incorrect username or password" if result.to_hash.first.last[:status_detail] == "Incorrect username or password"
             raise "Your IP Address is not in the access list!" if result.to_hash.first.last[:status_detail] =~ /The IP address of .*? is not in the access list/
             #raise api_call.xml if result.to_hash.first.last[:status] == "NO"

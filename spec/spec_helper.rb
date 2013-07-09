@@ -1,3 +1,6 @@
+require 'simplecov'
+SimpleCov.start
+
 require 'yaml'
 require './lib/kashflow_api'
 

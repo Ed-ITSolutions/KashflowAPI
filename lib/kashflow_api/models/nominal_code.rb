@@ -3,7 +3,7 @@ module KashflowApi
         def self.all
             result = KashflowApi.api.get_nominal_codes
             codes = []
-            result.basic_hash["soap:Envelope"]["soap:Body"]["GetNominalCodesResponse"]["GetNominalCodesResult"]["NominalCode"].each do |code|
+            result.hash[:envelope][:body][:get_nominal_codes_response][:get_nominal_codes_result][:nominal_code].each do |code|
                 codes.push(self.build_from_soap(code))
             end
             codes

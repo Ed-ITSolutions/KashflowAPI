@@ -6,35 +6,35 @@ module KashflowApi
         
         def self.find_by_customer_code(search)
             result = KashflowApi.api.get_customer(search)
-            self.build_from_soap(result.basic_hash["soap:Envelope"]["soap:Body"]["GetCustomerResponse"]["GetCustomerResult"])
+            self.build_from_soap(result.hash[:envelope][:body][:get_customer_response][:get_customer_result])
         end
         
         def self.find_by_customer_id(search)
             result = KashflowApi.api.get_customer_by_id(search)
-            self.build_from_soap(result.basic_hash["soap:Envelope"]["soap:Body"]["GetCustomerByIDResponse"]["GetCustomerByIDResult"])
+            self.build_from_soap(result.hash[:envelope][:body][:get_customer_by_id_response][:get_customer_by_id_result])
         end
         
         def self.find_by_customer_email(search)
             result = KashflowApi.api.get_customer_by_email(search)
-            self.build_from_soap(result.basic_hash["soap:Envelope"]["soap:Body"]["GetCustomerByEmailResponse"]["GetCustomerByEmailResult"])
+            self.build_from_soap(result.hash[:envelope][:body][:get_customer_by_email_response][:get_customer_by_email_result])
         end
         
         def self.find_by_postcode(search)
             result = KashflowApi.api.get_customers_by_postcode(search)
-            self.build_from_soap(result.basic_hash["soap:Envelope"]["soap:Body"]["GetCustomersByPostcodeResponse"]["GetCustomersByPostcode"])
+            self.build_from_soap(result.hash[:envelope][:body][:get_customers_by_postcode_response][:get_customers_by_postcode])
         end
         
         def self.all
             result = KashflowApi.api.get_customers
             customers = []
-            result.basic_hash["soap:Envelope"]["soap:Body"]["GetCustomersResponse"]["GetCustomersResult"]["Customer"].each do |customer|
+            result.hash[:envelope][:body][:get_customers_response][:get_customers_result][:customer].each do |customer|
                 customers.push self.build_from_soap customer
             end
             customers
         end
         
         def save
-           if @hash["CustomerID"] == "0"
+           if @hash[:customer_id] == "0"
                insert_customer
            else
                update_customer
@@ -42,7 +42,7 @@ module KashflowApi
         end
         
         def destroy
-            KashflowApi.api.delete_customer(self.customerid)
+            KashflowApi.api.delete_customer(self.customer_id)
         end
         
         def balance
@@ -53,10 +53,11 @@ module KashflowApi
             xml = []
             id_line = ""
             @hash.keys.each do |key|
-                if key == "CustomerID"
-                    id_line = "<#{key}>#{@hash[key]}</#{key}>" unless @hash[key] == "0"
+                if key == :customer_id
+                    id_line = "<CustomerID>#{@hash[key]}</CustomerID>" unless @hash[key] == "0"
                 else
-                    xml.push("<#{key}>#{@hash[key]}</#{key}>")
+                  key_name = key.to_s.split('_').map{|e| e.capitalize}.join
+                    xml.push("<#{key_name}>#{@hash[key]}</#{key_name}>")
                 end
             end
             [id_line, xml.join].join

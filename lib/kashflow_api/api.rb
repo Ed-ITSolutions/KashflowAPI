@@ -23,7 +23,7 @@ module KashflowApi
         private
         
         def self.generate_method_list
-            KashflowApi.client.client.wsdl.soap_actions
+            KashflowApi.client.client.operations
         end
     end
 end

@@ -21,7 +21,7 @@ describe KashflowApi::Customer do
     end
     
     it "should find a customer by kashflowid" do
-        id = KashflowApi::Customer.find(test_data("customer_code")).customerid
+        id = KashflowApi::Customer.find(test_data("customer_code")).customer_id
         KashflowApi::Customer.find_by_customer_id(id).should be_a KashflowApi::Customer 
     end
     
@@ -47,14 +47,21 @@ describe KashflowApi::Customer do
     end
     
     it "should update a customer" do
-       prechange = KashflowApi::Customer.find(test_data("customer_code"))
-       change_back_to = prechange.address2
-       prechange.address2 = "rspec_tests"
-       prechange.save
-       postchange = KashflowApi::Customer.find(test_data("customer_code"))
-       postchange.address2.should eq "rspec_tests"
-       postchange.address2 = change_back_to
-       postchange.save
+      customer = KashflowApi::Customer.new
+      customer.code = "RSPEC"
+      customer.name = "Rspec Test School"
+      customer.save
+      search = KashflowApi::Customer.find("RSPEC")
+      search.name.should eq "Rspec Test School"
+      search.address1.should be_nil
+      search.address1 = "rspec"
+      search.save
+      search = KashflowApi::Customer.find("RSPEC")
+      search.name.should eq "Rspec Test School"
+      search.address1.should eq "rspec"
+      search = KashflowApi::Customer.find("RSPEC")
+      search.name.should eq "Rspec Test School"
+      search.destroy
     end
     
     it "should create a new customer and then destroy it" do

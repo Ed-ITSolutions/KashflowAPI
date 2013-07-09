@@ -17,7 +17,7 @@ describe KashflowApi::Supplier do
     end
     
     it "should find a supplier by kashflowid" do
-        id = KashflowApi::Supplier.find(test_data("supplier_code")).supplierid
+        id = KashflowApi::Supplier.find(test_data("supplier_code")).supplier_id
         KashflowApi::Supplier.find_by_supplier_id(id).should be_a KashflowApi::Supplier
     end
 end
