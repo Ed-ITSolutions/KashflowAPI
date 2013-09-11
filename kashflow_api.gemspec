@@ -7,11 +7,9 @@ Gem::Specification.new do |s|
   s.version     = KashflowApi::VERSION
   s.authors     = ["Adam \"Arcath\" Laycock"]
   s.email       = ["gems@arcath.net"]
-  s.homepage    = ""
+  s.homepage    = "http://ed-itsolutions.github.io/KashflowAPI"
   s.summary     = %q{Provides an interface for the Kashflow API}
   s.description = s.summary
-
-  s.rubyforge_project = "kashflow_api"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
@@ -23,5 +21,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "simplecov"
   
   # Runtime Dependencies
-  s.add_runtime_dependency "savon", "~> 2.2"
+  s.add_runtime_dependency "savon", "~> 2.3"
 end
