@@ -37,7 +37,7 @@
 
       <section id="downloads">
         <span class="inner">
-          <a href="https://rubygems.org/gems/kashflow_api" class="zip"><em>download</em> .gem</a><a href="https://github.com/Ed-ITSolutions/KashflowAPI/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+          <a href="https://github.com/Ed-ITSolutions/KashflowAPI/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/Ed-ITSolutions/KashflowAPI/tarball/master" class="tgz"><em>download</em> .TGZ</a>
         </span>
       </section>
 
@@ -46,63 +46,40 @@
 
 
       <section id="main_content">
-		  <p>KashflowAPI is a ruby wrapper for the <a href="http://www.kashflow.com" target="_BLANK">Kashflow</a> API (Documentation at <a href="http://www.accountingapi.com" target="_BLANK">www.accountingapi.com</a>).</p>
-		  <p>KashflowAPI provides an active record style interface for the API allowing for:<pre>Customer.find(Customer_Code)</pre></p>
-		  <p><i>KashflowAPI was written by <a href="http://www.ed-itsolutions.com">Ed-IT Solutions</a> and is free for anyone to use, we only ask that you attribute the code to us if you use it.</i></p>
+        <h1>
+<a name="kashflowapi" class="anchor" href="#kashflowapi"><span class="octicon octicon-link"></span></a>KashflowApi</h1>
 
-		  <h1>Usage</h1>
+<p>KashflowApi provides an Active Record like interface to the Kashflow API.</p>
 
-		  <p>Before you can query the API you need to configure it, do this by adding teh following code to the top of your program, or a rails initializer:</p>
+<h1>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h1>
 
-		  <pre><code>
-KashflowApi.configure do |c|
-	c.username = "Username"
-	c.password = "Password"
-	c.loggers = false
-end
-		</code></pre>
+<p>At the beginning of your program, or in an rails initializer call the configure block like so:</p>
 
-		<p><i>Username</i> and <i>Password</i> are your login details to Kashflow, they <b>have</b> to be in plain text (sorry) its a <a href="http://www.kashflow.com/developers/soap-api/methods-usage/">limitation of the API</a></p>
-		
-		<p>Loggers is how you want Savon to output, if you omit this option Savon will output everything to STDOUT which results in a couple of hundred lines per request, great for development but in production you will want to set it to false.</p>
+<div class="highlight highlight-ruby"><pre><span class="no">KashflowApi</span><span class="o">.</span><span class="n">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span>
+  <span class="n">c</span><span class="o">.</span><span class="n">username</span> <span class="o">=</span> <span class="s2">"Username"</span>
+  <span class="n">c</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="s2">"Password"</span>
+  <span class="n">c</span><span class="o">.</span><span class="n">loggers</span> <span class="o">=</span> <span class="kp">false</span>
+<span class="k">end</span>
+</pre></div>
 
-		<p>Once thats setup you can call methods on the KashflowAPI models, for example to list all customers:</p>
+<p>I recommend settings loggers to false so that you don't get all the soap exchanges echoed out.</p>
 
-		<pre><code>KashflowApi::Customer.all</code></pre>
-		
-		<p>If you wanted to find a customer with the code <i>CUST01</i> then you would use:</p>
-		
-		<pre><code>KashflowApi::Customer.find("CUST01")</code></pre>
-		
-		<p>This would return an instance of KashflowAPI::Customer which you can interact with and save changes to. For example to set the first line of the address to <i>foo</i> you would:</p>
-		
-		<pre><code>cust = KashflowApi::Customer.find("CUST01")
-cust.address1 = "foo"
-cust.save</code></pre>
+<p>You can now call methods on the models e.g.</p>
 
+<div class="highlight highlight-ruby"><pre><span class="ss">KashflowApi</span><span class="p">:</span><span class="ss">:Customer</span><span class="o">.</span><span class="n">all</span>
+</pre></div>
 
-		<h1>Supported Methods</h1>
-		
-		<p>You can gain access to any of the methods of the api calling it on <i>KashflowApi.api</i> for example the same search again:</p>
+<h1>
+<a name="more-info" class="anchor" href="#more-info"><span class="octicon octicon-link"></span></a>More Info</h1>
 
-		<pre><code>Kashflow.api.get_customer("CUST01")</code></pre>
-
-		<p>The response is a Savon opject so to get the hash for the returned customer you would need to use:</p>
-		
-		<pre><code>result.basic_hash["soap:Envelope"]["soap:Body"]["GetCustomerResponse"]["GetCustomerResult"]</code></pre>
-
-		<p>Any method from the API can be called but due to a lack of consistency some methods require the addition of special cases to the KashflowApi::ApiCall#argument_xml function. We have tried to be as non specific as possible but only the methods we have tested are garunteed to work.</p>
-		
-		<h1>Wiki</h1>
-
-		<p>For more documentation see the <a href="https://github.com/Ed-ITSolutions/KashflowAPI/wiki">wiki</a></p>
-
+<p>For more info head over to the [wiki][<a href="https://github.com/Ed-ITSolutions/KashflowAPI/wiki">https://github.com/Ed-ITSolutions/KashflowAPI/wiki</a>]</p>
       </section>
 
       <footer>
         <span class="ribbon-outer">
           <span class="ribbon-inner">
-            <p>this project by <a href="https://github.com/Ed-ITSolutions">Ed-IT Solutions</a> can be found on <a href="https://github.com/Ed-ITSolutions/KashflowAPI">GitHub</a></p>
+            <p>this project by <a href="https://github.com/Ed-ITSolutions">Ed-ITSolutions</a> can be found on <a href="https://github.com/Ed-ITSolutions/KashflowAPI">GitHub</a></p>
           </span>
           <span class="left-tail"></span>
           <span class="right-tail"></span>
