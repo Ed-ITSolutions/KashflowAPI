@@ -10,6 +10,20 @@ module KashflowApi
     
     XMLKey = "SupplierID"
     
+    def self.build_arguments(action, object, field, argument)
+      if action == "get"
+        expects argument, String
+        return "<Supplier#{field}>#{argument}</Supplier#{field}>" if object == "supplier"
+        return "<#{field}>#{argument}</#{field}>" if object == "customers"
+      elsif action == "update"
+        expects argument, KashflowApi::Supplier
+        return "<sup>#{argument.to_xml}</sup>" if object == "supplier"
+      elsif action == "insert"
+        expects argument, KashflowApi::Supplier
+        return "<supl>#{argument.to_xml}</supl>" if object == "supplier"
+      end
+    end
+    
     def save
       if @hash["SupplierID"] == "0"
         insert_supplier

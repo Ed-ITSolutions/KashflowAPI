@@ -22,10 +22,4 @@ describe KashflowApi::ApiCall do
     
     KashflowApi::ApiCall.new("foo_bar", "bar")
   end
-  
-  it "should be able to work out what xml to use" do
-    config
-    
-    KashflowApi::ApiCall.new(:get_customer, example_customer.code)
-  end
 end

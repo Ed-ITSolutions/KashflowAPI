@@ -17,6 +17,17 @@ module KashflowApi
     
     define_methods
     
+    def self.build_arguments(action, object, field, argument)
+      if action == "get"
+        expects argument, String
+        return "<Customer#{field}>#{argument}</Customer#{field}>" if object == "customer"
+        return "<#{field}>#{argument}</#{field}>" if object == "customers"
+      elsif action == "update" || action == "insert"
+        expects argument, KashflowApi::Customer
+        return "<custr>#{argument.to_xml}</custr>" if object == "customer"
+      end
+    end
+    
     def save
       if @hash[:customer_id] == "0"
         insert_customer

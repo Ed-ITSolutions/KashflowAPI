@@ -6,7 +6,6 @@ module KashflowApi
             @method_sym = method.to_sym
             set_method(method)
             build_xml(argument)
-            raise xml if @raise
             return self
         end
         
@@ -53,55 +52,20 @@ module KashflowApi
         end
         
         def argument_xml(argument)
-            out = ""
-            if argument
-                if @action == "get"
-                    if @object == "customer" 
-                        out = "<Customer#{@field}>#{argument}</Customer#{@field}>"
-                    elsif @object == "customers"
-                        out = "<#{@field}>#{argument}</#{@field}>"
-                    elsif @object == "quote"
-                        out = "<Quote#{@field}>#{argument}</Quote#{@field}>"
-                    elsif @object == "supplier"
-                        out = "<Supplier#{@field}>#{argument}</Supplier#{@field}>"
-                    elsif @object == "receipt"
-                        out = "<ReceiptNumber>#{argument}</ReceiptNumber>"
-                    elsif @object == "invoice"
-                        out = "<InvoiceNumber>#{argument}</InvoiceNumber>"
-                    end
-                elsif @action == "update" || @action == "insert"
-                    if @object == "customer"
-                        out = "<custr>#{argument.to_xml}</custr>"
-                    elsif @object == "supplier"
-                        if @action == "insert"
-                            out = "<supl>#{argument.to_xml}</supl>"
-                        else
-                            out = "<sup>#{argument.to_xml}</sup>"
-                        end
-                    elsif @object == "receipt"
-                        if @field == "Line"
-                            out = "<ReceiptID>#{argument.receiptid}</ReceiptID><InvLine>#{argument.to_xml}</InvLine>"
-                        elsif @field == "Number"
-                            out = "<ReceiptNumber>#{argument.receiptnumber}</ReceiptNumber><InvLine>#{argument.to_xml}</InvLine>"
-                        else
-                            out = "<Inv>#{argument.to_xml}</Inv>"
-                        end
-                    elsif @object == "invoice"
-                        if @field == "Line"
-                            out = "<InvoiceID>#{argument.invoiceid}</InvoiceID><InvLine>#{argument.to_xml}</InvLine>"
-                        elsif @field == "Number"
-                            out = "<InvoiceNumber>#{argument.invoicenumber}</InvoiceNumber><InvLine>#{argument.to_xml}</InvLine>"
-                        else
-                            out = "<Inv>#{argument.to_xml}</Inv>"
-                        end
-                    end
-                elsif @action == "delete"
-                    if @object == "customer"
-                        out = "<CustomerID>#{argument}</CustomerID>"
-                    end
-                end
-            end
-            out
+          case @object
+          when "customer" || "customers"
+            return KashflowApi::Customer.build_arguments(@action, @object, @field, argument)
+          when "invoice"
+            return KashflowApi::Invoice.build_arguments(@action, @object, @field, argument)
+          when "quote"
+            return KashflowApi::Quote.build_arguments(@action, @object, @field, argument)
+          when "receipt"
+            return KashflowApi::Receipt.build_arguments(@action, @object, @field, argument)
+          when "supplier"
+            return KashflowApi::Supplier.build_arguments(@action, @object, @field, argument)
+          else
+            return ""
+          end
         end
     end
 end
