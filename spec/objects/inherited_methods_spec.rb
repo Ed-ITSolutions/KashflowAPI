@@ -1,6 +1,6 @@
 describe "Inherited Methods" do
   class SampleClass < KashflowApi::SoapObject
-    Key = [ "Foo", "Bar" ]
+    Keys = [ "Foo", "Bar", ["Widget", "hello"] ]
 
     Finds = [ "foo", "bar" ]
       
@@ -24,5 +24,11 @@ describe "Inherited Methods" do
   
   it "should find by bar" do
     SampleClass.find_by_bar("search")
+  end
+  
+  it "should set defaults in hash" do
+    instance = SampleClass.new
+    instance.foo.should eq ""
+    instance.widget.should eq "hello"
   end
 end

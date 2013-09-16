@@ -7,7 +7,6 @@ module KashflowApi
             set_method(method)
             build_xml(argument)
             raise xml if @raise
-            #@result = make_call
             return self
         end
         

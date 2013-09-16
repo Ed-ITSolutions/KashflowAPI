@@ -42,7 +42,7 @@ module KashflowApi
       hash = {}
       self.class::Keys.each do |key|
         key = [*key]
-        hash[key.first] = (key.last || "")
+        hash[key.first] = (key.last == key.first ? "" : key.last )
       end
       return hash
     end
