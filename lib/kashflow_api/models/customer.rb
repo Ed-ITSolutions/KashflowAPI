@@ -13,6 +13,8 @@ module KashflowApi
     
     KFObject = { singular: "customer", plural: "customers" }
     
+    XMLKey = "CustomerID"
+    
     define_methods
     
     def save
@@ -25,20 +27,6 @@ module KashflowApi
     
     def balance
       KashflowApi::CustomerBalance.new(self)
-    end
-    
-    def to_xml
-      xml = []
-      id_line = ""
-      @hash.keys.each do |key|
-        if key == :customer_id
-          id_line = "<CustomerID>#{@hash[key]}</CustomerID>" unless @hash[key] == "0"
-        else
-          key_name = key.to_s.split('_').map{|e| e.capitalize}.join
-          xml.push("<#{key_name}>#{@hash[key]}</#{key_name}>")
-        end
-      end
-      [id_line, xml.join].join
     end
   end
 end

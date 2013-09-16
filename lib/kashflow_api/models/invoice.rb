@@ -7,6 +7,8 @@ module KashflowApi
       Finds = [ "InvoiceNumber" ]
     
       KFObject = { singular: "invoice", plural: "invoices" }
+      
+      XMLKey = "InvoiceDBID"
     
       define_methods
       
@@ -24,19 +26,6 @@ module KashflowApi
             else
                 update_invoice
             end
-        end
-        
-        def to_xml
-            xml = []
-            id_line = ""
-            @hash.keys.each do |key|
-                if key == "InvoiceDBID"
-                    id_line = "<#{key}>#{@hash[key]}</#{key}>" unless @hash[key] == "0"
-                else
-                    xml.push("<#{key}>#{@hash[key]}</#{key}>")
-                end
-            end
-            [id_line, xml.join].join
         end
         
         private

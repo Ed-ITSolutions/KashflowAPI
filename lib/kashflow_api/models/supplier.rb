@@ -8,6 +8,8 @@ module KashflowApi
     
     KFObject = { singular: "supplier", plural: "suppliers" }
     
+    XMLKey = "SupplierID"
+    
     def save
       if @hash["SupplierID"] == "0"
         insert_supplier
@@ -16,19 +18,6 @@ module KashflowApi
       end 
     end
       
-    def to_xml
-      xml = []
-      id_line = ""
-      @hash.keys.each do |key|
-        if key == "SupplierID"
-          id_line = "<#{key}>#{@hash[key]}</#{key}>" unless @hash[key] == "0"
-        else
-          xml.push("<#{key}>#{@hash[key]}</#{key}>")
-        end
-      end
-      [id_line, xml.join].join
-    end
-        
     private
    
     def update_supplier

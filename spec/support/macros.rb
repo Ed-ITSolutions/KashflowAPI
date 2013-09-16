@@ -9,6 +9,7 @@ module ModelMacros
         klass::Keys.should be_a Array
         klass::Finds.should be_a Array
         klass::KFObject.should be_a Hash
+        klass::XMLKey.should be_a String
       end
       
       it "should have a new object hash" do

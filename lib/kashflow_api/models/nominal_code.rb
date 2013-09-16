@@ -7,5 +7,7 @@ module KashflowApi
       Finds = []
       
       KFObject = { singular: "nominal_code", plural: "nominal_codes" }
+      
+      XMLKey = "NominalCodeID"
     end
 end

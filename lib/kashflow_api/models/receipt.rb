@@ -6,25 +6,14 @@ module KashflowApi
     
     KFObject = { singular: "receipt", plural: "receipts" }
     
+    XMLKey = "InvoiceDBID"
+    
     def save
       if @hash["InvoiceDBID"] == "0"
         insert_receipt
       else
         update_receipt
       end
-    end
-
-    def to_xml
-      xml = []
-      id_line = ""
-      @hash.keys.each do |key|
-        if key == "InvoiceDBID"
-          id_line = "<#{key}>#{@hash[key]}</#{key}>" unless @hash[key] == "0"
-        else
-          xml.push("<#{key}>#{@hash[key]}</#{key}>")
-        end
-      end
-      [id_line, xml.join].join
     end
 
     private
