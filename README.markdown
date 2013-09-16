@@ -1,5 +1,7 @@
 # KashflowApi
 
+[![Build Status](https://travis-ci.org/Ed-ITSolutions/KashflowAPI.png?branch=master)](https://travis-ci.org/Ed-ITSolutions/KashflowAPI) [![Code Climate](https://codeclimate.com/github/Ed-ITSolutions/KashflowAPI.png)](https://codeclimate.com/github/Ed-ITSolutions/KashflowAPI) [![Coverage Status](https://coveralls.io/repos/Ed-ITSolutions/KashflowAPI/badge.png)](https://coveralls.io/r/Ed-ITSolutions/KashflowAPI)
+
 KashflowApi provides an Active Record like interface to the Kashflow API.
 
 # Usage

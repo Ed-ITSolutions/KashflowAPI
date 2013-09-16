@@ -18,7 +18,6 @@ Gem::Specification.new do |s|
   
   # Development Dependencies
   s.add_development_dependency "rspec"
-  s.add_development_dependency "simplecov"
   
   # Runtime Dependencies
   s.add_runtime_dependency "savon", "~> 2.3"
