@@ -4,3 +4,4 @@ Gemfile.lock
 pkg/*
 spec/test_data.yml
 coverage/*
+spec-old/test_data.yml

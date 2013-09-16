@@ -1,5 +1,14 @@
 module KashflowApi
     class Line < KashflowApi::SoapObject
+      Keys = [
+        "Quantity", "Description", "ChargeType", "VatAmount", "VatRate", "Rate", "ReceiptID", "InvoiceID", "InvoiceNumber", "ReceiptNumber"
+      ]
+      
+      Finds = []
+      
+      KFObject = {singular: "line", plural: "lines"}
+      
+      
         def save
             if @hash["ReceiptID"] != ""
                 insert_receipt_line
@@ -26,10 +35,6 @@ module KashflowApi
         end
         
         private
-        
-        def blank_object_hash
-            {"Quantity" => "", "Description" => "", "ChargeType" => "", "VatAmount" => "", "VatRate" => "", "Rate" => "", "ReceiptID" => "", "InvoiceID" => "", "InvoiceNumber" => "", "ReceiptNumber" => "" }
-        end
         
         def insert_receipt_line
             KashflowApi.api.insert_receipt_line(self)

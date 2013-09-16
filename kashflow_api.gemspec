@@ -22,4 +22,5 @@ Gem::Specification.new do |s|
   
   # Runtime Dependencies
   s.add_runtime_dependency "savon", "~> 2.3"
+  s.add_runtime_dependency "expects", "~> 0.0.3"
 end
