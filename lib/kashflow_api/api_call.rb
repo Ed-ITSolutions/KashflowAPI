@@ -7,7 +7,12 @@ module KashflowApi
             set_method(method)
             build_xml(argument)
             raise xml if @raise
-            @result = make_call
+            #@result = make_call
+            return self
+        end
+        
+        def make_call
+            KashflowApi.client.call(self)
         end
         
         private
@@ -46,10 +51,6 @@ module KashflowApi
         def user_details
             "<UserName>#{KashflowApi.config.username}</UserName>
             <Password>#{KashflowApi.config.password}</Password>\n"
-        end
-        
-        def make_call
-            KashflowApi.client.call(self)
         end
         
         def argument_xml(argument)

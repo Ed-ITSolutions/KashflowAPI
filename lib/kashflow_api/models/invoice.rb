@@ -1,9 +1,18 @@
 module KashflowApi
     class Invoice < KashflowApi::SoapObject
-        def self.find(search)
-            result = KashflowApi.api.get_invoice(search)
-            self.build_from_soap(result.hash[:envelope][:body][:get_invoice_response][:get_invoice_result])
-        end
+      Keys = [
+        "InvoiceNumber", "InvoiceDate", "DueDate", "CustomerID", "CustomerReference", ["InvoiceDBID", "0"]
+      ]
+        
+      Finds = [ "InvoiceNumber" ]
+    
+      KFObject = { singular: "invoice", plural: "invoices" }
+    
+      define_methods
+      
+      def customer=(cust)
+        
+      end
         
         def customer
             KashflowApi::Customer.find_by_customer_id(self.customerid)
@@ -31,10 +40,6 @@ module KashflowApi
         end
         
         private
-        
-        def blank_object_hash
-            { "InvoiceNumber" => "", "InvoiceDate" => "", "DueDate" => "", "CustomerID" => "", "CustomerReference" => "", "InvoiceDBID" => "0" }
-        end
         
         def update_invoice
             KashflowApi.api.update_invoice(self)
