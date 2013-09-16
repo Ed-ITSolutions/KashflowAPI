@@ -40,7 +40,7 @@ module KashflowApi
         xml = []
         id_line = ""
         @hash.keys.each do |key|
-            if key == self::XMLKey
+            if key == self.class::XMLKey
                 id_line = "<#{key}>#{@hash[key]}</#{key}>" unless @hash[key] == "0"
             else
                 xml.push("<#{key}>#{@hash[key]}</#{key}>")

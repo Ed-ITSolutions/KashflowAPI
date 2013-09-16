@@ -6,6 +6,8 @@ describe "Inherited Methods" do
       
     KFObject = { singular: "foo", plural: "foos" }
     
+    XMLKey = "Foo"
+    
     define_methods
   end
   
@@ -30,5 +32,10 @@ describe "Inherited Methods" do
     instance = SampleClass.new
     instance.foo.should eq ""
     instance.widget.should eq "hello"
+  end
+  
+  it "should generate some HTML" do
+    instance = SampleClass.new
+    instance.to_xml.should be_a String
   end
 end
