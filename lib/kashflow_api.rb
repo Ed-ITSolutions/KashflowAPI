@@ -1,5 +1,40 @@
 # Gems
+require 'expects'
 require "savon"
+
+module KashflowApi
+  def self.configure
+    @config = Config.new
+    yield @config
+    @api = Api.new
+  end
+  
+  def self.config
+    @config
+  end
+    
+  def self.api
+    @api
+  end
+  
+  def self.api_methods
+    @api_methods ||= Api.method_list
+  end
+  
+  def self.client
+    @client ||= Client.new(@config)
+  end
+  
+  def self.soap_objects
+    @soap_objects ||= []
+  end
+  
+  def self.add_soap_object(klass)
+    @soap_objects ||= []
+    @soap_objects.push klass
+  end
+end
+
 # Kashflow Main Clases
 require "kashflow_api/soap_object"      # Soap Object Class
 require "kashflow_api/config"           # Config Class
@@ -18,27 +53,3 @@ require "kashflow_api/models/receipt"   # Receipt Class
 require "kashflow_api/models/supplier"  # Supplier
 # Version
 require "kashflow_api/version"
-
-module KashflowApi
-    def self.configure
-        @config = Config.new
-        yield @config
-        @api = Api.new
-    end
-    
-    def self.config
-        @config
-    end
-    
-    def self.api
-        @api
-    end
-    
-    def self.api_methods
-        @api_methods ||= Api.methods
-    end
-    
-    def self.client
-        @client ||= Client.new(@config)
-    end
-end
