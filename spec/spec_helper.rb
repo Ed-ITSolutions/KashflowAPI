@@ -43,6 +43,16 @@ module KashflowApi
       return klass.new
     end
     
+    def get_foo(search)
+      klass = Class.new do
+        def hash
+          { envelope: { body: { get_foo_response: { get_foo_result: { foo: [] } } } } }
+        end
+      end
+      
+      return klass.new
+    end
+    
     def get_foo_by_bar(search)
       klass = Class.new do
         def hash

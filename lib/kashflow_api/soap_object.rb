@@ -23,9 +23,17 @@ module KashflowApi
       return results
     end
     
+    def self.find(search)
+      self.send(find_method, search)
+    end
+    
+    def self.find_method
+      "find_by_#{self::Finds.first}".to_sym
+    end
+    
     def self.define_methods
       self::Finds.each do |find|
-        method_name = find == self::Finds.first ? :find : "find_by_#{find}".to_sym
+        method_name = "find_by_#{find}".to_sym
         result_name = find == self::Finds.first ? "get_#{self::KFObject[:singular]}" : "get_#{self::KFObject[:singular]}_by_#{find}"
         
         self.define_singleton_method(method_name, Proc.new { |search|
@@ -48,7 +56,7 @@ module KashflowApi
         end
         [id_line, xml.join].join
     end
-    
+        
     private
     
     def new_object_hash

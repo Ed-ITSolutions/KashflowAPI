@@ -17,7 +17,11 @@ describe "Inherited Methods" do
   
   it "should define find" do
     SampleClass.methods.include?(:find).should be_true
-    SampleClass.methods.include?(:find_by_foo).should be_false
+  end
+  
+  it "should set the find_method" do
+    SampleClass.find_method.should eq :find_by_foo
+    SampleClass.send(SampleClass.find_method, "foo")
   end
   
   it "should find all" do
