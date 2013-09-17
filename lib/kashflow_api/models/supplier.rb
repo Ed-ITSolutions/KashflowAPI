@@ -14,7 +14,7 @@ module KashflowApi
       if action == "get"
         expects argument, String
         return "<Supplier#{field}>#{argument}</Supplier#{field}>" if object == "supplier"
-        return "<#{field}>#{argument}</#{field}>" if object == "customers"
+        return "<#{field}>#{argument}</#{field}>" if object == "suppliers"
       elsif action == "update"
         expects argument, KashflowApi::Supplier
         return "<sup>#{argument.to_xml}</sup>" if object == "supplier"
