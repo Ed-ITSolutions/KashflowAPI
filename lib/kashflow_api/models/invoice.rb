@@ -17,7 +17,7 @@ module KashflowApi
           expects argument, String
           return "<InvoiceNumber>#{argument}</InvoiceNumber>" if object == "invoice"
         elsif action == "update" || action == "insert"
-          expects argument, KashflowApi::Invoice
+          expects argument, [KashflowApi::Invoice, KashflowApi::Line]
           return "<InvoiceID>#{argument.invoiceid}</InvoiceID><InvLine>#{argument.to_xml}</InvLine>" if field == "Line"
           return "<InvoiceNumber>#{argument.invoicenumber}</InvoiceNumber><InvLine>#{argument.to_xml}</InvLine>" if field == "Number"
           return "<Inv>#{argument.to_xml}</Inv>" if object == "invoice"

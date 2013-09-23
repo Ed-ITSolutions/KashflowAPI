@@ -13,7 +13,7 @@ module KashflowApi
         expects argument, String
         return "<ReceiptNumber>#{argument}</ReceiptNumber>" if object == "receipt"
       elsif action == "update" || action == "insert"
-        expects argument, KashflowApi::Receipt
+        expects argument, [KashflowApi::Receipt, KashflowApi::Line]
         return "<ReceiptID>#{argument.receiptid}</ReceiptID><InvLine>#{argument.to_xml}</InvLine>" if field == "Line"
         return "<ReceiptNumber>#{argument.invoicenumber}</ReceiptNumber><InvLine>#{argument.to_xml}</InvLine>" if field == "Number"
         return "<Inv>#{argument.to_xml}</Inv>" if object == "receipt"
