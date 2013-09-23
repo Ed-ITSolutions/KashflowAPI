@@ -16,7 +16,7 @@ module KashflowApi
         expects argument, [KashflowApi::Receipt, KashflowApi::Line]
         if field == "Line"
           return "<ReceiptID>#{argument.receiptid}</ReceiptID><InvLine>#{argument.to_xml}</InvLine>" if argument.receiptid != ""
-          return "<ReceiptNumber>#{argument.invoicenumber}</ReceiptNumber><InvLine>#{argument.to_xml}</InvLine>" if argument.receiptnumber != ""
+          return "<ReceiptNumber>#{argument.receiptnumber}</ReceiptNumber><InvLine>#{argument.to_xml}</InvLine>" if argument.receiptnumber != ""
         end
         return "<Inv>#{argument.to_xml}</Inv>" if object == "receipt"
       end
