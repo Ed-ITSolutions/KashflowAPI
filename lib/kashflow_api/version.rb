@@ -1,3 +1,3 @@
 module KashflowApi
-  VERSION = "0.1.0.git"
+  VERSION = "0.1.0"
 end
