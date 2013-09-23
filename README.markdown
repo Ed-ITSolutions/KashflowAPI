@@ -4,6 +4,16 @@
 
 KashflowApi provides an Active Record like interface to the Kashflow API.
 
+# Install
+
+You can install KashflowApi by adding it yo your `Gemfile` like this:
+
+```ruby
+gem 'kashflow_api'
+```
+
+and running `bundle install`
+
 # Usage
 
 At the beginning of your program, or in an rails initializer call the configure block like so:
@@ -22,8 +32,14 @@ You can now call methods on the models e.g.
 
 ``` ruby
 KashflowApi::Customer.all
+KashflowApi::Customer.find("Cust01")
+KashflowApi::Customer.find_by_email("customer@domain.tld")
 ```
+
+## Saving
+
+All the Kashflow objects in the gem have a `.save` method which will either insert a new record or update the current one.
 
 # More Info
 
-For more info head over to the [wiki][https://github.com/Ed-ITSolutions/KashflowAPI/wiki]
+For more info head over to the [wiki](https://github.com/Ed-ITSolutions/KashflowAPI/wiki)
